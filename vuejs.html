@@ -1,0 +1,82 @@
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Кодировка веб-страницы -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="vue.css" >
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>Homework 11</title>
+
+    <!-- Подключаем Bootstrap JS -->    
+    <script src="js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+<div class="hello">
+<span v-bind:title="message" ><b>This is important!</b></span>
+
+</div>
+<fieldset class="bobo">
+<legend class="cool">
+  <h1>Учет посещаемости студентов</h1>
+  </legend>
+  <p>Здесь необходимо ввести фамилию и имя студента, который пришел на пару. </p>
+<div class="container">
+<form id="none">
+<input class="name" v-model="name" placeholder="Введите имя" type="text" name="name" required="required"/>
+<input class="surname" v-model="surname" placeholder="Введите фамилию" type="text" name="surname" required="required"/>
+<button class="btn" @click.prevent="addStudent">Добавить</button>
+</form>
+
+<ul class="list">
+<p v-show="listStatus">Список пока пуст</p>
+<li v-for="student in students">{{ student }}</li>
+</ul>
+</div>
+</fieldset>
+<script>
+new Vue({
+    el: '.container',
+    data: {
+        listStatus: true,
+        name: "",
+        surname: "",
+        students: []
+    },
+    methods: {
+        addStudent: function(e) {
+            if (this.fullName == false) {
+                return;
+            } else {
+                this.students.push(this.fullName);
+            }
+        }
+    },
+    computed: {
+        fullName: function() {
+            if (this.name == "" || this.surname == "") {
+                return false
+            } else {
+                this.listStatus = false;
+                return this.name + " " + this.surname;
+            }
+        }
+    }
+});
+
+</script>
+<script type="text/javascript">   
+var app = new Vue ({
+el: '.hello',
+data: {
+message: 'This message is important!' + new Date()
+}
+})
+</script>
+	
+</body>
+
+</html>
